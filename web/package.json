@@ -1,28 +1,37 @@
 {
-  "$schema": "https://json.schemastore.org/package.json",
-  "name": "@ephemera/web",
-  "private": true,
-  "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview",
-    "test": "vitest run"
-  },
-  "dependencies": {
-    "@solidjs/router": "^0.15.3",
-    "solid-js": "^1.9.7"
-  },
-  "devDependencies": {
-    "@iconify-json/solar": "^1.2.2",
-    "@iconify/tailwind4": "^1.0.6",
-    "@tailwindcss/vite": "^4.1.11",
-    "@tsconfig/strictest": "^2.0.5",
-    "tailwindcss": "^4.1.11",
-    "typescript": "~5.8.3",
-    "vite": "^7.0.4",
-    "vite-plugin-solid": "^2.11.7",
-    "vitest": "^3.2.4"
-  }
+    "$schema": "https://json.schemastore.org/package.json",
+    "name": "@ephemera/web",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -b && vite build",
+        "preview": "vite preview",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "@solid-primitives/media": "^2.3.3",
+        "@solidjs/router": "^0.15.3",
+        "solid-js": "^1.9.7"
+    },
+    "devDependencies": {
+        "@iconify-json/solar": "^1.2.2",
+        "@iconify/tailwind": "^1.2.0",
+        "@sira-ui/tailwind": "^0.11.8",
+        "@tsconfig/strictest": "^2.0.5",
+        "@types/node": "^24.1.0",
+        "@types/postcss-import": "^14.0.3",
+        "@types/postcss-preset-env": "^7.7.0",
+        "cssnano": "^7.1.0",
+        "postcss": "^8.5.6",
+        "postcss-import": "^15.1.0",
+        "postcss-load-config": "^6.0.1",
+        "postcss-preset-env": "^10.2.4",
+        "tailwindcss": "^3.4.17",
+        "typescript": "^5.8.3",
+        "vite": "^7.0.4",
+        "vite-plugin-solid": "^2.11.7",
+        "vitest": "^3.2.4"
+    }
 }

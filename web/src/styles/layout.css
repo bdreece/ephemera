@@ -1,0 +1,12 @@
+#main {
+}
+
+#header {
+    @apply flex items-center mb-4 p-2;
+}
+
+#footer {
+}
+
+#sidebar {
+}

@@ -1,17 +1,20 @@
-import Header from "./header";
-import Footer from "./footer";
-import Sidebar from "./sidebar";
+import type { ParentProps } from 'solid-js';
+import Header from './header';
+import Footer from './footer';
+import Sidebar from './sidebar';
 
-export default function Layout() {
-  return (
-    <>
-      <div>
-        <Header />
-        <main></main>
-        <Footer />
-      </div>
+export interface LayoutProps extends ParentProps {}
 
-      <Sidebar />
-    </>
-  );
+export default function Layout({ children }: LayoutProps) {
+    return (
+        <>
+            <main id="main">
+                <Header title="ephemera" />
+                {children}
+                <Footer />
+            </main>
+
+            <Sidebar />
+        </>
+    );
 }

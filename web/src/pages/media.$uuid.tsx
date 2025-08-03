@@ -1,5 +1,5 @@
-import type { RouteSectionProps } from "@solidjs/router";
+import type { RouteSectionProps } from '@solidjs/router';
 
-export default function Component(props: RouteSectionProps) {
-  return <></>;
+export default function Component(_props: RouteSectionProps) {
+    return <></>;
 }
