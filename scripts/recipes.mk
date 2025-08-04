@@ -1,20 +1,24 @@
-$(BIN): $(GOSRC) | $(GOGEN) $(TMPDIR)
-	$(GO) build $(GOFLAGS) -o $(TMPDIR) $(PKG)
+$(go_bin) : go_src += $(sql_gen) $(stringer_gen)
+$(go_bin) : $(go_src) | $(tmpbindir)
+	${GO_BUILD} -o $| $(PKG)
 
-$(DIST): $(JSSRC) | $(JSLOCK)
-	$(NPM) run $(NPMFLAGS) build
+$(sql_gen)                  : $(sql_src)
+$(stringer_gen)             : $(stringer_src)
+$(sql_gen) $(stringer_gen) &: $(sql_src) $(stringer_src) | $(GOSTAMP)
+	${GO_GENERATE} $(GENPKG)
 
-$(GOGEN): | $(GOLOCK)
-	$(GO) generate $(GOFLAGS) $(PKG)
-
-$(GOLOCK):
-	$(GO) mod download
-	$(GO) mod verify
+$(GOSTAMP) : $(GOMOD)
+	${GO} mod download
+	${GO} mod verify
 	@touch -m $@
 
-$(JSLOCK): 
-	$(NPM) ci
+$(vite_dist) : $(vite_src) | $(NPMPACKAGELOCK) $(tmpdistdir)
+	${NPM_RUN_SCRIPT} build
 
-$(TMPDIR):
+$(NPMPACKAGELOCK) : NPMFLAGS += --include-workspace-root
+$(NPMPACKAGELOCK) : $(NPMPACKAGEJSON)
+	${NPM_INSTALL}
+
+$(tmpbindir) $(tmpdistdir) :
 	@mkdir -p $@
 

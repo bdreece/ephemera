@@ -17,7 +17,7 @@ default: build
 .PHONY: help
 help:
 	@cat scripts/banner.txt
-	@sed -n 's/^## \(.*\): \(.*\)/\1|\2/p' ${MAKEFILE_LIST} \
+	@sed -f $(scriptdir)/list_targets.sed ${MAKEFILE_LIST} \
 		| column -t -s '|' -N TARGET,DESCRIPTION
 
 ## version: display version information
@@ -33,49 +33,49 @@ version:
 ## clean: clean build artifacts
 .PHONY: clean
 clean:
-	@rm -rf $(TMPDIR) $(GOGEN)
+	@rm -rf $(tmpdir) $(sql_gen) $(stringer_gen)
 
 ## fullclean: clean build artifacts and remove dependencies
 .PHONY: fullclean
 fullclean: clean
-	@rm -rf $(NPMMODULEDIR) $(GOLOCK)
+	@rm -rf $(nodemoduledir) $(GOSTAMP)
 
 ## generate: generate Go source code
 .PHONY: generate
-generate: $(GOGEN)
+generate: $(sql_gen) $(stringer_gen)
 
 ## restore: restore application dependencies
-.PHONY: restore restore/go restore/npm
-restore: restore/go restore/npm
+.PHONY: restore restore/go restore/js
+restore: restore/go restore/js
 
 ## restore/go: restore Go module cache
-restore/go: $(GOLOCK)
+restore/go: $(GOSTAMP)
 
-## restore/npm: restore NPM node_modules/ directory
-restore/npm: $(NPMLOCK)
+## restore/js: restore NPM node_modules/ directory
+restore/js: $(NPMPACKAGELOCK)
 
 ## build: build the application
-.PHONY: build build/go build/solidjs
-build: build/go build/solidjs
+.PHONY: build build/go build/js
+build: build/go build/js
 
 ## build/go: compile the Go backend
-build/go: restore/go $(BIN) 
+build/go: $(go_bin)
 
-## build/solidjs: transpile the SolidJS frontend.
-build/solidjs: $(DIST)
+## build/js: transpile the SolidJS frontend.
+build/js: $(vite_dist)
 
-## watch: launch applications with hot-reload capabilities
-.PHONY: watch watch/go watch/solidjs
-watch: | $(TMPDIR)
-	@parallel $(PARALLELFLAGS) $(MAKE) ::: "watch/go" "watch/js"
+## watch: launch applications with live-reload
+.PHONY: watch watch/go watch/js
+watch:
+	@${PARALLEL_MAKE} ::: "watch/go" "watch/js"
 
 ## watch/go: watch the Go backend with Air
 watch/go:
-	$(GO) tool air -c configs/air.toml
+	${AIR} $(AIRFLAGS)
 
 ## watch/vite: serve the SolidJS frontend.
-watch/solidjs:
-	$(NPM) run $(NPMFLAGS) dev
+watch/js: restore/js
+	${NPM_RUN_SCRIPT} dev
 
 ## test: run all testing suites
 .PHONY: test test/go test/vitest
@@ -83,11 +83,11 @@ test: test/go test/vitest
 
 ## test/go: run Go testing suite
 test/go:
-	$(GO) test $(GOFLAGS) $(PKG)
+	${GO_TEST} $(PKG)
 
 ## test/vitest: run Vitest testing suite
 test/vitest:
-	$(NPM) run $(NPMFLAGS) test
+	${NPM_RUN_SCRIPT} test
 
 include scripts/recipes.mk
 
