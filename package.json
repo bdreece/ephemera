@@ -1,9 +1,27 @@
 {
-  "$schema": "https://json.schemastore.org/package.json",
-  "name": "ephemera",
-  "version": "1.0.0",
-  "author": "Brian Reece <me@bdreece.dev>",
-  "license": "MIT",
-  "type": "module",
-  "workspaces": ["web"]
+    "$schema": "https://json.schemastore.org/package.json",
+    "name": "ephemera",
+    "version": "1.0.0",
+    "author": "Brian Reece <me@bdreece.dev>",
+    "license": "MIT",
+    "type": "module",
+    "workspaces": [
+        "web"
+    ],
+    "devDependencies": {
+        "@eslint/js": "^9.32.0",
+        "@types/eslint-config-prettier": "^6.11.3",
+        "eslint": "^9.32.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-solid": "^0.14.5",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.1.2",
+        "prettier": "^3.6.2",
+        "prettier-plugin-go-template": "^0.0.15",
+        "prettier-plugin-sql": "^0.19.2",
+        "stylelint": "^16.23.0",
+        "stylelint-config-tailwindcss": "^1.0.0",
+        "typescript": "^5.8.3",
+        "typescript-eslint": "^8.38.0"
+    }
 }
