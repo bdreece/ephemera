@@ -166,3 +166,7 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node,go
 
+.go.stamp
+tmp/
+*_string.go
+*.sql.go
