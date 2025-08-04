@@ -4,8 +4,8 @@
 
 CREATE TABLE IF NOT EXISTS users (
 	           id INTEGER NOT NULL,
-	   created_at INTEGER NOT NULL DEFAULT unixepoch( 'now' ),
-	   updated_at INTEGER NOT NULL DEFAULT unixepoch( 'now' ),
+	   created_at NUMERIC NOT NULL DEFAULT unixepoch( 'now' ),
+	   updated_at NUMERIC NOT NULL DEFAULT unixepoch( 'now' ),
 	         uuid    TEXT NOT NULL,
 	 display_name    TEXT NOT NULL,
 	   first_name    TEXT NOT NULL,
@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS friends (
 
 CREATE TABLE IF NOT EXISTS media (
 	        id INTEGER NOT NULL,
-	created_at INTEGER NOT NULL DEFAULT unixepoch( 'now' ),
-	updated_at INTEGER NOT NULL DEFAULT unixepoch( 'now' ),
+	created_at NUMERIC NOT NULL DEFAULT unixepoch( 'now' ),
+	updated_at NUMERIC NOT NULL DEFAULT unixepoch( 'now' ),
 	      uuid    TEXT NOT NULL,
 	     title    TEXT NOT NULL,
 	      desc    TEXT     NULL,
@@ -77,7 +77,7 @@ CREATE INDEX IF NOT EXISTS  media_by_mime ON media ( type ASC, format ASC, creat
 
 CREATE TABLE IF NOT EXISTS tags (
 	        id INTEGER NOT NULL,
-	created_at INTEGER NOT NULL DEFAULT unixepoch( 'now' ),
+	created_at NUMERIC NOT NULL DEFAULT unixepoch( 'now' ),
 	   content    TEXT NOT NULL,
 
 	PRIMARY KEY ( id ),
@@ -97,9 +97,11 @@ CREATE TABLE IF NOT EXISTS media_tags (
 	    tag_id INTEGER NOT NULL,
 
 	PRIMARY KEY ( media_id, tag_id ),
+
 	FOREIGN KEY ( media_id ) REFERENCES media ( id )
 		ON DELETE CASCADE
 		ON UPDATE RESTRICT,
+
 	FOREIGN KEY ( tag_id ) REFERENCES tags ( id )
 		ON DELETE CASCADE
 		ON UPDATE RESTRICT

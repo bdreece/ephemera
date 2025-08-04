@@ -1,6 +1,5 @@
 import type { PluginCreator } from 'tailwindcss/types/config';
 import type { Config } from 'tailwindcss';
-import sira from '@sira-ui/tailwind/dist/plugin';
 import { addIconSelectors } from '@iconify/tailwind';
 
 export default {
@@ -8,5 +7,5 @@ export default {
     theme: {
         extend: {},
     },
-    plugins: [sira as PluginCreator, addIconSelectors(['solar'])],
+    plugins: [addIconSelectors(['solar'])],
 } satisfies Config;
