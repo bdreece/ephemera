@@ -15,6 +15,7 @@ type File interface {
 type Provider interface {
 	fs.SubFS
 	fs.StatFS
+	io.Closer
 
 	Name() string
 	Create(name string) (File, error)

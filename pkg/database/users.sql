@@ -51,4 +51,6 @@ SET    first_name = @first_name,
       refresh_jti = @refresh_jti
 WHERE        uuid = @uuid;
 
-
+-- name: DeleteUser :execrows
+DELETE FROM users
+WHERE uuid = @uuid;

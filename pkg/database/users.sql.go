@@ -9,6 +9,27 @@ import (
 	"context"
 )
 
+const deleteUser = `-- name: DeleteUser :execrows
+DELETE FROM users
+WHERE uuid = ?1
+`
+
+type DeleteUserParams struct {
+	Uuid string `json:"uuid"`
+}
+
+// DeleteUser
+//
+//	DELETE FROM users
+//	WHERE uuid = ?1
+func (q *Queries) DeleteUser(ctx context.Context, arg DeleteUserParams) (int64, error) {
+	result, err := q.db.ExecContext(ctx, deleteUser, arg.Uuid)
+	if err != nil {
+		return 0, err
+	}
+	return result.RowsAffected()
+}
+
 const findUserByDisplayName = `-- name: FindUserByDisplayName :one
 SELECT id, created_at, updated_at, uuid, display_name, first_name, last_name, password_hash, password_salt, bio, avatar_url, totp_secret, refresh_jti
   FROM users
