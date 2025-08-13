@@ -1,20 +1,19 @@
-import type { ParentProps } from 'solid-js';
-import Header from './header';
+import type { RouteSectionProps } from '@solidjs/router';
+import { Drawer, Menu } from '~/components';
+import items from '~/nav.json' with { type: 'json' };
+import Navbar from './navbar';
 import Footer from './footer';
-import Sidebar from './sidebar';
 
-export interface LayoutProps extends ParentProps {}
-
-export default function Layout({ children }: LayoutProps) {
+export default function Layout(props: RouteSectionProps) {
     return (
-        <>
-            <main id="main">
-                <Header title="ephemera" />
-                {children}
-                <Footer />
-            </main>
-
-            <Sidebar />
-        </>
+        <Drawer sidebar={<Menu orientation="vertical">{items}</Menu>}>
+            {id => (
+                <>
+                    <Navbar toggle={id}>{items}</Navbar>
+                    <div class="flex-1">{props.children}</div>
+                    <Footer />
+                </>
+            )}
+        </Drawer>
     );
 }

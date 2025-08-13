@@ -1,7 +1,51 @@
-@import 'tailwindcss/base';
-@import './styles/base.css';
-@import './styles/layout.css';
+@import 'tailwindcss';
+@theme {
+    --font-sans:
+        'Lexend', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-@import 'tailwindcss/components';
+    --font-display:
+        'Lexend Deca', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+}
 
-@import 'tailwindcss/utilities';
+@plugin 'daisyui';
+
+@plugin "daisyui/theme" {
+    name: 'light';
+    default: true;
+    prefersdark: false;
+    color-scheme: light;
+    --color-primary: #3c4558;
+    --color-secondary: #b8999f;
+    --color-accent: #8a7360;
+    --color-neutral: #1f232e;
+    --color-base-100: #eaecf1;
+}
+
+@plugin "daisyui/theme" {
+    name: 'dark';
+    default: false;
+    prefersdark: true;
+    color-scheme: dark;
+    --color-primary: #a7b0c3;
+    --color-secondary: #66474d;
+    --color-accent: #9f8875;
+    --color-neutral: #1f232e;
+    --color-base-100: #0e1015;
+}
+
+@plugin "@iconify/tailwind4" {
+    prefixes: 'solar';
+}
+
+@layer components {
+    .drawer {
+        @apply min-h-screen;
+    }
+
+    .iconify {
+        @apply text-lg;
+    }
+}

@@ -1,6 +1,4 @@
-import type { RouteSectionProps } from '@solidjs/router';
-
-export default function Home(_props: RouteSectionProps) {
+export default function Page() {
     return (
         <article>
             <header>

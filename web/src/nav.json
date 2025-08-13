@@ -1,0 +1,39 @@
+[
+    {
+        "text": "Library",
+        "icon": "solar--library-line-duotone",
+        "children": [
+            {
+                "text": "Overview",
+                "icon": "solar--list-line-duotone",
+                "href": "/library/"
+            },
+            {
+                "text": "Upload",
+                "icon": "solar--upload-line-duotone",
+                "href": "/library/upload"
+            }
+        ]
+    },
+    {
+        "text": "Discover",
+        "icon": "solar--global-line-duotone",
+        "children": [
+            {
+                "text": "Audio",
+                "icon": "solar--music-library-2-line-duotone",
+                "href": "/media/audio"
+            },
+            {
+                "text": "Image",
+                "icon": "solar--album-line-duotone",
+                "href": "/media/image"
+            },
+            {
+                "text": "Video",
+                "icon": "solar--video-library-line-duotone",
+                "href": "/media/video"
+            }
+        ]
+    }
+]

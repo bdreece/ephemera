@@ -1,22 +1,22 @@
 import type { RouteDefinition } from '@solidjs/router';
 import { lazy } from 'solid-js';
 
+const Home = lazy(() => import('./pages/_index.tsx'));
+const Settings = lazy(() => import('./pages/settings.tsx'));
+const UserLayout = lazy(() => import('./pages/user.tsx'));
+
 export default [
     {
         path: '/',
-        component: lazy(() => import('./pages/_index.tsx')),
-    },
-    {
-        path: '/overview',
-        component: lazy(() => import('./pages/overview.tsx')),
+        component: Home,
     },
     {
         path: '/settings',
-        component: lazy(() => import('./pages/settings.tsx')),
+        component: Settings,
     },
     {
-        path: '/account',
-        component: lazy(() => import('./pages/user.tsx')),
+        path: '/user',
+        component: UserLayout,
         children: [
             {
                 path: '/',
@@ -33,28 +33,34 @@ export default [
         component: lazy(() => import('./pages/media.tsx')),
         children: [
             {
-                path: '/',
-                component: lazy(() => import('./pages/media.tsx')),
-            },
-            {
-                path: '/upload',
-                component: lazy(() => import('./pages/media.upload.tsx')),
-            },
-            {
-                path: '/:uuid',
-                component: lazy(() => import('./pages/media.$uuid.tsx')),
+                path: '/:type',
+                component: lazy(() => import('./pages/media.$type.tsx')),
                 children: [
                     {
-                        path: '/',
+                        path: '/:uuid',
                         component: lazy(
-                            () => import('./pages/media.$uuid._index.tsx'),
+                            () => import('./pages/media.$type.$uuid.tsx'),
                         ),
-                    },
-                    {
-                        path: '/download',
-                        component: lazy(
-                            () => import('./pages/media.$uuid.download.tsx'),
-                        ),
+                        children: [
+                            {
+                                path: '/',
+                                component: lazy(
+                                    () =>
+                                        import(
+                                            './pages/media.$type.$uuid._index.tsx'
+                                        ),
+                                ),
+                            },
+                            {
+                                path: '/download',
+                                component: lazy(
+                                    () =>
+                                        import(
+                                            './pages/media.$type.$uuid.download.tsx'
+                                        ),
+                                ),
+                            },
+                        ],
                     },
                 ],
             },
