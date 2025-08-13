@@ -8,10 +8,9 @@ import (
 	"github.com/bdreece/ephemera/pkg/identity"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/go-chi/docgen"
 )
 
-func build(p *Params) chi.Router {
+func newRouter(p *Params) chi.Router {
 	r := chi.NewRouter()
 	r.Use(
 		middleware.Logger,
@@ -35,6 +34,5 @@ func build(p *Params) chi.Router {
 		r.Get("/*", revproxy.ServeHTTP)
 	}
 
-	docgen.PrintRoutes(r)
 	return r
 }

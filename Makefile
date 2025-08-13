@@ -43,6 +43,8 @@ fullclean: clean
 ## generate: generate Go source code
 .PHONY: generate
 generate: $(sql_gen) $(stringer_gen)
+	@echo $(stringer_src)
+	@echo $(stringer_gen)
 
 ## restore: restore application dependencies
 .PHONY: restore restore/go restore/js
@@ -78,15 +80,15 @@ watch/js: restore/js
 	${NPM_RUN_SCRIPT} dev
 
 ## test: run all testing suites
-.PHONY: test test/go test/vitest
-test: test/go test/vitest
+.PHONY: test test/go test/js
+test: test/go test/js
 
 ## test/go: run Go testing suite
-test/go:
+test/go: generate
 	${GO_TEST} $(PKG)
 
-## test/vitest: run Vitest testing suite
-test/vitest:
+## test/js: run Vitest testing suite
+test/js: restore/js
 	${NPM_RUN_SCRIPT} test
 
 include scripts/recipes.mk

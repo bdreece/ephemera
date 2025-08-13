@@ -1,6 +1,5 @@
-$(go_bin) : go_src += $(sql_gen) $(stringer_gen)
-$(go_bin) : $(go_src) | $(tmpbindir)
-	${GO_BUILD} -o $| $(PKG)
+$(go_bin) : $(go_src) | $(tmpbindir) $(sql_gen) $(stringer_gen)
+	${GO_BUILD} -o $(tmpbindir) $(PKG)
 
 $(sql_gen)                  : $(sql_src)
 $(stringer_gen)             : $(stringer_src)

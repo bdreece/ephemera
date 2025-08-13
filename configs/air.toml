@@ -6,6 +6,7 @@ tmp_dir = "tmp"
   args_bin = [
     "-port", "8080",
     "-env", "dev",
+    "-level", "DEBUG",
     "-dsn", "file://tmp/db.sqlite3",
     "-root", "tmp/content",
   ]

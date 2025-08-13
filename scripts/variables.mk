@@ -72,8 +72,8 @@ sql_gen         := $(addsuffix .go,$(sql_src))
 
 stringer_src	:= $(shell ${FIND_GO} -exec grep -Hl 'go tool stringer' {} \;)
 stringer_gen	:= $(shell ${FIND_GO} -exec grep -H 'go tool stringer' {} \;    \
-                         | $(scriptdir)/extract_enum.sed                        \
-                         | $(scriptdir)/format_filename.awk)
+                         | $(scriptdir)/extract_stringer.sed                    \
+                         | $(scriptdir)/resolve_stringer.awk)
 
 NPM              = npm
 NPMFLAGS        := --workspace $(webapp)
@@ -82,10 +82,9 @@ NPMPACKAGELOCK  := $(nodemoduledir)/.package-lock.json
 NPM_INSTALL      = ${NPM} install $(NPMFLAGS)
 NPM_RUN_SCRIPT   = ${NPM} run-script $(NPMFLAGS)
 
-vite_cfg        := postcss.config.js    \
-                   tailwind.config.ts   \
-                   tsconfig.json        \
+vite_cfg        := tsconfig.json        \
                    tsconfig.app.json    \
+                   tsconfig.node.json    \
                    vite.config.ts
 
 vite_src         = $(shell $(FIND_VITE_PUBLIC)) \

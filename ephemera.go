@@ -70,7 +70,7 @@ func New(opts ...Option) *App {
 		env: p.Environment,
 		srv: http.Server{
 			Addr:    p.Addr,
-			Handler: build(p),
+			Handler: newRouter(p),
 		},
 	}
 
