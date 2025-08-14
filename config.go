@@ -34,6 +34,7 @@ var defaultJWTConfig = JWTConfig{
 var DefaultConfig = Config{
 	Port:        8080,
 	StorageRoot: "/var/lib/ephemera/media",
+	JWTConfig:   defaultJWTConfig,
 	SqliteDSN: database.DSN{
 		Path: "/var/lib/ephemera/db.sqlite3",
 	},

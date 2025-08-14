@@ -2,7 +2,7 @@ import { type JSX, type FlowProps, createUniqueId } from 'solid-js';
 import Sidebar from './sidebar';
 
 export interface DrawerProps
-    extends FlowProps<{}, (id: string) => JSX.Element> {
+    extends FlowProps<object, (id: string) => JSX.Element> {
     sidebar: JSX.Element;
 }
 

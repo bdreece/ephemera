@@ -10,7 +10,7 @@ export default function Layout(props: RouteSectionProps) {
             {id => (
                 <>
                     <Navbar toggle={id}>{items}</Navbar>
-                    <div class="flex-1">{props.children}</div>
+                    <div class="flex-1 px-8">{props.children}</div>
                     <Footer />
                 </>
             )}

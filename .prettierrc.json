@@ -1,0 +1,11 @@
+{
+    "plugins": ["prettier-plugin-go-template", "prettier-plugin-sql"],
+    "tabWidth": 4,
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "singleAttributePerLine": true,
+    "experimentalOperatorPosition": "start",
+    "language": "sqlite",
+    "keywordCase": "upper",
+    "dataTypeCase": "upper"
+}

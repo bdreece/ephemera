@@ -18,12 +18,12 @@ type TX interface {
 
 type DB interface {
 	DBTX
-	Begin() TX
+	Begin() (TX, error)
 }
 
 type db struct{ *sql.DB }
 
-func (conn *db) Begin() TX { return conn.Begin() }
+func (conn *db) Begin() (TX, error) { return conn.DB.Begin() }
 
 func OpenSQLite(dsn DSN) (DB, error) {
 	conn, err := sql.Open("sqlite", dsn.String())

@@ -20,12 +20,16 @@ func init() {
 
 func main() {
 	defer exit()
-
 	flag.Parse()
+
+	app, err := ephemera.New(ephemera.WithConfig(&cfg))
+	if err != nil {
+		panic(err)
+	}
+
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer cancel()
-
-	if err := ephemera.New(ephemera.WithConfig(&cfg)).Run(ctx); err != nil {
+	if err := app.Run(ctx); err != nil {
 		panic(err)
 	}
 }

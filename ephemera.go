@@ -48,10 +48,12 @@ func DebugInfo() (info struct {
 	return
 }
 
-func New(opts ...Option) *App {
+func New(opts ...Option) (*App, error) {
 	p := new(Params)
 	for _, fn := range opts {
-		fn(p)
+		if err := fn(p); err != nil {
+			return nil, err
+		}
 	}
 
 	if p.Logger == nil {
@@ -74,7 +76,7 @@ func New(opts ...Option) *App {
 		},
 	}
 
-	return &app
+	return &app, nil
 }
 
 func (app *App) Run(ctx context.Context) error {

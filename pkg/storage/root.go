@@ -41,7 +41,7 @@ func (p *RootProvider) Stat(name string) (fs.FileInfo, error) {
 
 // Sub implements [fs.SubFS].
 func (p *RootProvider) Sub(dir string) (fs.FS, error) {
-	root, err := p.Root.OpenRoot(dir)
+	root, err := p.OpenRoot(dir)
 	if err != nil {
 		return nil, err
 	}

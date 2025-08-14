@@ -6,7 +6,9 @@
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "prepare": "husky"
+        "prepare": "husky",
+        "lint:npm": "lint-staged",
+        "lint:go": "go tool golangci-lint run ./... && go tool golangci-lint fmt ./..."
     },
     "devDependencies": {
         "@eslint/js": "^9.32.0",
@@ -32,10 +34,6 @@
         "*.css": [
             "stylelint --fix",
             "prettier --check --write"
-        ],
-        "*.go": [
-            "go tool golangci-lint run",
-            "go tool golangci-lint fmt"
         ],
         "*.{js,jsx,ts,tsx}": [
             "eslint --fix",
