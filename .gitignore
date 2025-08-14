@@ -169,4 +169,4 @@ dist
 .go.stamp
 tmp/
 *_string.go
-*.sql.go
+pkg/database/*.sql.go
